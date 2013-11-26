@@ -139,18 +139,19 @@ if (isset($_POST['doImport'])) {
                     $invoice_date = $field[15]?'\''.$field[15].'\'':'NULL';
                     $input_date = '\''.$field[16].'\'';
                     $last_update = '\''.$field[17].'\'';
-
+					$biblio = utility::getID($dbs, 'biblio', 'biblio_id', 'title', $field[18], $bio_id_cache);
+                    $biblio = $biblio?'\''.$biblio.'\'':'NULL';
                     // sql insert string
                     $sql_str = "INSERT INTO item (item_code, call_number, coll_type_id,
                         inventory_code, received_date, supplier_id,
                         order_no, location_id, order_date, item_status_id, site,
                         source, invoice, price, price_currency, invoice_date,
-                        input_date, last_update)
+                        input_date, last_update, biblio_id)
                             VALUES ($item_code, $call_number, $coll_type,
                             $inventory_code, $received_date, $supplier,
                             $order_no, $location, $order_date, $item_status, $site,
                             $source, $invoice, $price, $price_currency, $invoice_date,
-                            $input_date, $last_update)";
+                            $input_date, $last_update, $biblio)";
 
                     // send query
                     // die($sql_str);
